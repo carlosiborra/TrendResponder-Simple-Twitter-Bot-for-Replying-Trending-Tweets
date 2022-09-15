@@ -23,12 +23,11 @@ def post_tweet(client, text='Hello, world!'):
     return tweet
 
 def get_popular_tweets_hastag(api, selection='#yoursearch', num=5):
-    """Get the last tweets from a user"""
+    """Get the last tweets from a hastag"""
     for tweet in tweepy.Cursor(api.search_tweets, selection, result_type='popular').items(num):
         print(tweet)
 
-# def get_popular_tweets_user(client, selection='from:elonmusk', selection='retweet', count=100):
-#     """Get the last tweets from a user"""
-#     for tweet in tweepy.Cursor(client.search, q='#yoursearch',result_type='popular').items(5):
-#         print(tweet)
-#     return tweets
+def get_popular_tweets_user(client, selection='from:elonmusk', num=5):
+    """Get the last tweets from a user"""
+    for tweet in tweepy.Cursor(client.search_tweets, selection, result_type='popular').items(num):
+        print(tweet)
