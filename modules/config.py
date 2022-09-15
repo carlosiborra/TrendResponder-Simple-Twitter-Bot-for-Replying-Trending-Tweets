@@ -1,21 +1,37 @@
 """ config.py docstring """
 
-# This is hastag which Twitter bot will
-# search and retweet You can edit this with
-# any hastag .For example : '# javascript'
+import logging
+import tweepy
+import requests
+from modules import credentials
 
-QUERY = '# anything'
+def  set_up_api():
+    """ set_up_api() docstring """
 
-# Twitter bot setting for liking Tweets
-LIKE = True
+    logging.basicConfig(level=logging.INFO, filename='main.log',
+                    filemode='w', format='%(levelname)s -> %(message)s', force=True)
 
-# Twitter bot setting for following user who tweeted
-FOLLOW = True
+    # ? Constants declaration
+    CONSUMER_KEY = credentials.CONSUMER_KEY
+    CONSUMER_SECRET = credentials.CONSUMER_SECRET
+    ACCESS_TOKEN = credentials.ACCESS_TOKEN
+    ACCESS_TOKEN_SECRET = credentials.ACCESS_TOKEN_SECRET
+    BEARER_TOKEN = credentials.BEARER_TOKEN
 
-# Twitter bot sleep time settings in seconds.
-# For example SLEEP_TIME = 300 means 5 minutes.
-# Please, use large delay if you are running bot
-# all the time so that your account does not
-# get banned.
+    # ? Authenticate to Twitter
+    auth = tweepy.OAuthHandler(CONSUMER_KEY, CONSUMER_SECRET)
+    auth.set_access_token(ACCESS_TOKEN, ACCESS_TOKEN_SECRET)
 
-SLEEP_TIME = 300
+    # ? Set up API
+    api = tweepy.API(auth)
+
+    # ? Set up Client
+    client = tweepy.Client(bearer_token=BEARER_TOKEN,
+                           consumer_key=CONSUMER_KEY,
+                           consumer_secret=CONSUMER_SECRET,
+                           access_token=ACCESS_TOKEN,
+                           access_token_secret=ACCESS_TOKEN_SECRET,
+                           return_type=requests.Response,
+                           wait_on_rate_limit=True)
+
+    return client, api, auth
