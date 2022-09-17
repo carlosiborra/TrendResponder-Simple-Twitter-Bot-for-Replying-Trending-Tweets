@@ -1,5 +1,6 @@
 """bot0.py docstring"""
 
+
 from datetime import datetime
 from random import randint
 import logging
@@ -8,10 +9,11 @@ sys.path.insert(0, '.')
 import modules.actions as actions
 import modules.config as config
 
-
 api, client, auth = config.set_up_api()
 
 # ? Main decorator
+
+
 def main_decorator(func):
     """ main() decorator docstring """
 
@@ -63,10 +65,24 @@ def main():
     # ? Get the most popular tweets from a certain user
     # actions.get_popular_tweets_user(api, f"from:elonmusk", 1)
 
+    # ? Post a reply for the most popular tweet of a trend
+    num_tweets = 2
+    reponses_list = ['Totalmente de acuerdo con ', 'No me lo puedo creer...',
+                     'Vaya, vaya...', 'Quién lo iba a decir...', 'Qué vergüenza...',
+                     '¡Madre mía!', '¡Esto es increible!', 'Pufgh...', 'No tiene sentido!!']
+
+    tweets_id = actions.get_popular_tweets_hastag(
+        api, f"{trends[0]['name']}", num_tweets, 'id')
+
+    for i in range(0, num_tweets):
+        twitter_post = actions.post_tweet(client, reponses_list[randint(
+            0, len(reponses_list)-1)], str(woeid), tweets_id[i])
+        print(twitter_post.text)
+
     # ? Post a tweet for the most popular trend
     # reponses_list = ['Totalmente de acuerdo con ', 'No me lo puedo creer...',
-    #  'Vaya, vaya...', 'Quién lo iba a decir...', 'Qué vergüenza...',
-    #  '¡Madre mía!', '¡Esto es increible!', 'Pufgh...', 'No tiene sentido!!']
+    # 'Vaya, vaya...', 'Quién lo iba a decir...', 'Qué vergüenza...',
+    # '¡Madre mía!', '¡Esto es increible!', 'Pufgh...', 'No tiene sentido!!']
 
     # if trends[0]["name"][0] is "#":
     # trends[0]["name"] = trends[0]["name"][1:]
@@ -74,7 +90,12 @@ def main():
 
     # twitter_post = actions.post_tweet(
     # client, text=f'{reponses_list[randint(0, len(reponses_list)-1)]} #{trends[0]["name"]}')
-    # print(twitter_post)
+    # print(twitter_post.text)
+
+    # ? Get twitter mentions from a user in a certain time range
+    # mention = actions.get_user_metions(
+    # client, ids='44196397', num=5, start_time=None, end_time=None) # num >= 5
+    # print(mention.text)
 
 
 if __name__ == '__main__':

@@ -1,8 +1,4 @@
 INFO -> Executing bot0.py main()...
-INFO -> Execution time: 2022-09-16 01:52:13.967252
-INFO -> Ending time: 2022-09-16 01:52:14.224187
-INFO -> Total execution time: 0:00:00.256935
-INFO -> Executing bot1.py main()...
-INFO -> Execution time: 2022-09-16 01:52:14.224187
-INFO -> Ending time: 2022-09-16 01:52:14.505511
-INFO -> Total execution time: 0:00:00.282336
+INFO -> Execution time: 2022-09-17 23:36:00.284959
+INFO -> Ending time: 2022-09-17 23:36:01.637683
+INFO -> Total execution time: 0:00:01.352724

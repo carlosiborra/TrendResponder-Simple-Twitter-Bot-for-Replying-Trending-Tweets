@@ -34,4 +34,4 @@ def  set_up_api():
                            return_type=requests.Response,
                            wait_on_rate_limit=True)
 
-    return client, api, auth
+    return api, client, auth

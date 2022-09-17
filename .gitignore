@@ -1,1 +1,5 @@
+__pycache__/
 credentials.py
+venv
+*.pyc
+*.cpython-310.pyc
